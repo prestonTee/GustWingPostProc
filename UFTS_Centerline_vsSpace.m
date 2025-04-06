@@ -9,7 +9,7 @@ D = 0.762; % [m]
 % Non-comparitive selectior
 % Choose 3 or 2 Hz first, next selector only matters if 3Hz
 f = 3; % Hz
-simple = false;
+simple = true;
 
 if f == 2
     vFileLoc = 'Unsteady2Hz/varts/';

@@ -187,7 +187,7 @@ for k = iTrue
             vDat = extractVartInfo(vFileLoc, vPrefix, vSuffix, delta_ts);
             vDat = vDat(1:end, :);
 
-            [tPhase, uPhase, pPhase, uMed] = processVartData(vDat, tOverTau, iShift, nPhases, nPerPhase);
+            [tPhase, uPhase, pPhase, uMean, uPhaseSTD] = processVartData(vDat, tOverTau, iShift, nPhases, nPerPhase);
             % uNorm = uDat/uMed;
             
             %% Plot it
@@ -195,10 +195,12 @@ for k = iTrue
             figure(1)
             %     plot(tPhase, uPhase, '--', 'Color', color, 'LineWidth',1.5)
             plot(tPhase, uPhase, line, 'Color', ColorVecG{i}, 'LineWidth',k+1)
-            
+            fill([tPhase; flip(tPhase)], [uPhase+uPhaseSTD; flip(uPhase-uPhaseSTD)], ColorVecG{i}, 'FaceAlpha', 0.3, 'EdgeColor', 'none')
+
             figure(10+k)
             %     plot(tPhase, uPhase, '--', 'Color', color, 'LineWidth',1.5)
             plot(tPhase, uPhase, line, 'Color', ColorVecG{i}, 'LineWidth',4)
+            fill([tPhase; flip(tPhase)], [uPhase+uPhaseSTD; flip(uPhase-uPhaseSTD)], ColorVecG{i}, 'FaceAlpha', 0.3, 'EdgeColor', 'none')
             title(n)
         end        
     end
